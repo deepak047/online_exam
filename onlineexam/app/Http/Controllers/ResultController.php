@@ -40,17 +40,19 @@ class ResultController extends Controller
             ['student_id'=>$getId,
              'uniqueid'=>$getExamCode
         ])->value('wrong_ans'));
+		
+		$not_attended=($total-($score+$wrong_ans));
 
          $chartjs = app()->chartjs
         ->name('pieChartTest')
         ->type('doughnut')
         ->size(['width' => 400, 'height' => 200])
-        ->labels(['Right Answers', 'Wrong Answers'])
+        ->labels(['Right Answers', 'Wrong Answers','Not Attended'])
         ->datasets([
             [
-                'backgroundColor' => ['#FF6384', '#36A2EB'],
-                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
-                'data' => [$score, $wrong_ans]
+                'backgroundColor' => ['#FF6384', '#36A2EB','#808080'],
+                'hoverBackgroundColor' => ['#FF6384', '#36A2EB','#808080'],
+                'data' => [$score, $wrong_ans,$not_attended]
             ]
         ])
         ->options([]);

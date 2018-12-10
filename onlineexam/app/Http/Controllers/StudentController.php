@@ -36,21 +36,25 @@ class StudentController extends Controller
         if ($checker>0) {
             return "YOU ALREADY DONE THIS EXAM";
         }else{
+			$id=11;
+			$questions=Question::where('quiz_id',$id)->get();
+			$questionsCount = $questions->count();
             $student = Student::create([
             'student_id' => $sIdForValidate,
             'uniqueid' => $examCodeForValidate,
             'score' =>$initialScore,
-            'total'=>$initialTotal,
+            'total'=>$questionsCount,
             'wrong_ans'=>$initialWrong
             ]);
 
             $findtime='5';
-            $id=11;
+            
             $course='PHP LARAVEL';
             $studentRealId=$sIdForValidate;
             $student_id=Student::where('student_id',$studentRealId)->value('id');
           
-            $questions=Question::where('quiz_id',$id)->get();
+            
+			
             return view('answer.show')->with('questions', $questions)->with('student_id',$student_id)->with('course',$course)->with('time',$findtime);
            
             //return view('welcome');

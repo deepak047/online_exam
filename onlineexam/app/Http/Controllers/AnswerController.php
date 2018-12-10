@@ -47,12 +47,12 @@ class AnswerController extends Controller
             ]);
             if ($request->input('answer')==$request->input('true_answer')) {
                 $insert=Student::where('id',$request->input('student_id'))->increment('score');
-                $insert_total=Student::where('id',$request->input('student_id'))->increment('total');
+                //$insert_total=Student::where('id',$request->input('student_id'))->increment('total');
                 
             }else
             {
                 $insert=Student::where('id',$request->input('student_id'))->increment('wrong_ans');
-                $insert_total=Student::where('id',$request->input('student_id'))->increment('total');
+                //$insert_total=Student::where('id',$request->input('student_id'))->increment('total');
               
             }
             return response($answer);
